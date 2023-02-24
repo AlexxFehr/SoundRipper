@@ -39,7 +39,14 @@ app.post('/download', async (req, res) => {
 app.get("/download", async (req, res) => {
     
     console.log("GET");
-    res.download("video.mp4");
+    res.download("video.mp4", (e) => {
+
+        //TODO Check for errors
+
+        fs.unlink("video.mp4", (e) => {
+            //TODO Check for errors
+        });
+    });
 });
 
 

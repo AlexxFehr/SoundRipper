@@ -6,20 +6,29 @@ import cors from "cors";
 import ffmpeg from "fluent-ffmpeg"; 
 import ytdl from "ytdl-core";
 
+import fs from "fs";
+
 
 //Init express
 const app =  express();
 
+//Init ffmpeg
+const proc = new ffmpeg();
+
+//Use cors
 app.use(cors());
 
+//Use bodyparser to parse the incoming json
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //On post request
 app.post('/download', async (req, res) => {
-    console.log(req.body);
-    res.send("200");
+    const videoLink = req.body.link;
+    const quality = req.body.quality;
+
+    ytdl(videoLink, { filter: (format) => format.container === 'mp4' }).pipe(fs.createWriteStream('video.mp4')).on("finish", () => fs.close());
 });
 
 //Run express on port 8080

@@ -1,4 +1,6 @@
-import express from 'express';
+import express from "express";
+import ffmpeg from "fluent-ffmpeg"; 
+import ytdl from "ytdl";
 
 
 //Init express
@@ -6,9 +8,9 @@ const app =  express();
 
 
 //On post request
-app.post('download', async (req, res) => {
+app.post('/download', async (req, res) => {
 
-    console.log("Tests");
+
 
 });
 

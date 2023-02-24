@@ -7,10 +7,30 @@
     <title>SoundRipper</title>
   </head>
   <body>
-    <form id="form" method="post" action="">
+    <form id="form">
       <label for="amount">Link </label>
       <div class="flex">
-        <input id="link" type="text"/>
+        <input id="link_input" type="text" />
+        <select id="quality_input" class="select-input">
+          <optgroup label="Audio Interchange File">
+            <option value="aif_32k">.aif - 32k</option>
+            <option value="aif_64k">.aif - 64k</option>
+            <option value="aif_128k">.aif - 128k</option>
+          </optgroup>
+
+          <optgroup label="MPEG-1 Audio Layer 3">
+            <option value="mp3_32k">.mp3 - 32k</option>
+            <option value="mp3_64k">.mp3 - 64k</option>
+            <option value="mp3_128k">.mp3 - 128k</option>
+          </optgroup>
+
+          <optgroup label="Waveform Audio File">
+            <option value="wav_32k">.wav - 32k</option>
+            <option value="wav_64k">.wav - 64k</option>
+            <option value="wav_128k">.wav - 128k</option>
+          </optgroup>
+        </select>
+        <button id="submit" type="submit">Download</button>
       </div>
     </form>
 

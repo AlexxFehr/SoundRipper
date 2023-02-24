@@ -28,8 +28,20 @@ app.post('/download', async (req, res) => {
     const videoLink = req.body.link;
     const quality = req.body.quality;
 
-    ytdl(videoLink, { filter: (format) => format.container === 'mp4' }).pipe(fs.createWriteStream('video.mp4')).on("finish", () => fs.close());
+    ytdl(videoLink)
+        .pipe(fs.createWriteStream('video.mp4'))
+        .on("finish", () => {
+            res.send("200");
+        });
 });
+
+//On get request
+app.get("/download", async (req, res) => {
+    
+    console.log("GET");
+    res.download("video.mp4");
+});
+
 
 //Run express on port 8080
 app.listen(8080, () => console.log("Server running on port 8080"));

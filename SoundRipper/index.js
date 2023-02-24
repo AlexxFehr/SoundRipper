@@ -1,4 +1,6 @@
 import "./style.css";
+import http from "http";
+import fs from "fs";
 
 //Get form from web
 const form = document.querySelector("form");
@@ -13,15 +15,18 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData(form);
 
   //Send post request and await reponse
-  const response = await fetch("http://localhost:8080/download", {
+  const post = await fetch("http://localhost:8080/download", {
     method: "POST",
     headers: {
-      "Content-Type" : "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       link: formData.get("link_input"),
       quality: formData.get("quality_input"),
     }),
   });
+
+  
+  location.href = "http://localhost:8080/download";
 
 });

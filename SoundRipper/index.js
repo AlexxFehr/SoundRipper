@@ -1,6 +1,7 @@
 import "./style.css";
 import http from "http";
 import fs from "fs";
+import { getYTVideoID } from "./getYTVideoID";
 
 //Get form from web
 const form = document.querySelector("form");
@@ -15,7 +16,8 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData(form);
 
   //Send post request and await reponse
-  const post = await fetch("http://localhost:8080/download", {
+  //TODO Save response with link and use to GET
+  await fetch("http://localhost:8080/download", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,9 +26,10 @@ form.addEventListener("submit", async (e) => {
       link: formData.get("link_input"),
       quality: formData.get("quality_input"),
     }),
-  });
+  })
 
+  //Download file
+  location.href = "http://localhost:8080/download?id=" + getYTVideoID(formData.get("link_input"));
   
-  location.href = "http://localhost:8080/download";
 
 });
